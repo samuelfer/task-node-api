@@ -1,12 +1,11 @@
 const express = require("express");
-const routes = express.Router();
-
-routes.get('/', (req, res) => res.send('Deus é bom'));
+const routes = require("./routes");
 
 const app = express();
+const port = 3333;
 
 app.use(routes);
 
-app.listen(3333, () => {
-    console.log('Back strated at http://localhost:3333');
-})
+app.listen(port, () => {
+    console.log(`Back started at http://localhost:${port}`);
+});
