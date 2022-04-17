@@ -50,5 +50,14 @@ module.exports = {
         } catch (error) {
             response.status(500).json({ error: "Error when trying to update" });
         }
+    },
+
+    async delete(request, response) {
+        try {
+            await response.task.remove();
+            return response.status(200).json({ message: "Task deleted successfully" });
+        } catch (error) {
+            return response.status(500).json({ error: "Error when trying to delete" });
+        }
     }
 };

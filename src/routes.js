@@ -8,5 +8,6 @@ routes.get("/tasks", TaskController.get);
 routes.post("/tasks", TaskController.store);
 
 routes.put("/tasks/:id", TaskMidlleware.validateId, TaskController.update);
+routes.delete("/tasks/:id", TaskMidlleware.validateId, TaskController.delete);
 
 module.exports = routes;
