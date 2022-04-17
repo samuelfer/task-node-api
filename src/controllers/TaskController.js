@@ -1,5 +1,6 @@
 const { express } = require("express");
 const {v4: uuid} = require("uuid");
+const { update } = require("../models/Tasks");
 const Task = require("../models/Tasks");
 
 module.exports = {
@@ -31,6 +32,23 @@ module.exports = {
             return response.status(201).json({ message: "Task created successfully" });
         } catch (err) {
             return response.status(400).json({ error: err.message });
+        }
+    },
+
+    async update(request, response) {
+        const { title, description } = request.body;
+
+        if (!title && !description) {
+            return response.status(400).json({ error: "You must inform a new title or a new description" });
+        }
+        if (title) response.task.title = title;
+        if (description) response.task.description = description;
+
+        try {
+            await response.task.save();
+            return response.status(200).json({ message: "Task updated successfully" });
+        } catch (error) {
+            response.status(500).json({ error: "Error when trying to update" });
         }
     }
 };
